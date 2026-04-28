@@ -1,0 +1,26 @@
+{
+  "name": "dms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/server.ts"
+  },
+  "dependencies": {
+    "knex": "^3.2.9",
+    "koa": "^3.2.0",
+    "koa-bodyparser": "^4.4.1",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^14.0.0",
+    "mysql2": "^3.22.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^3.0.2",
+    "@types/koa-bodyparser": "^4.3.13",
+    "@types/koa-multer": "^1.0.5",
+    "@types/koa-router": "^7.4.9",
+    "@types/multer": "^2.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
