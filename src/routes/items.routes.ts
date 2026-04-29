@@ -4,13 +4,22 @@ import * as items from '../services/item.services';
 
 const router = new Router();
 
-router.get('/items', async (ctx) => {
-    const parentId =
-      ctx.query.parentId && !isNaN(Number(ctx.query.parentId))
-        ? Number(ctx.query.parentId)
-        : null;
-  
-    ctx.body = await items.getChildren(parentId);
+router.get('/items', async (ctx: Context) => {
+  const parentId =
+    ctx.query.parentId && !isNaN(Number(ctx.query.parentId))
+      ? Number(ctx.query.parentId)
+      : null;
+
+  const page = ctx.query.page ? Number(ctx.query.page) : 1;
+  const limit = ctx.query.limit ? Number(ctx.query.limit) : 10;
+  const sort = ctx.query.sort as string | undefined;
+
+  ctx.body = await items.getChildren({
+    parentId,
+    page,
+    limit,
+    sort,
   });
+});
 
 export default router;

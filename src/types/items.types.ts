@@ -10,3 +10,10 @@ export interface Item {
   file_content?: string | null;
   created_at: string;
 }
+
+export type GetChildrenParams = {
+  parentId: number | null;
+  page: number;
+  limit: number;
+  sort?: string;
+};
