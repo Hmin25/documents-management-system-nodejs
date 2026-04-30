@@ -1,13 +1,14 @@
 import db from '../db/knex';
-import { Item, GetChildrenParams } from '../types/items.types';
+import { Item, GetChildrenParams } from '../types/db/items.types';
+import { FileDTO, FolderDTO } from '../types/http/file-folder.dto';
 
 // create folder
 export async function createFolder(
   name: string,
   parentId: number | null,
   createdBy: string
-) {
-  const [id] = await db<Item>('items').insert({
+): Promise<FolderDTO> {
+  const [id] = await db('items').insert({
     name,
     type: 'folder',
     parent_id: parentId,
@@ -28,7 +29,7 @@ export async function createFolder(
     createdBy: string;
     fileSize: number;
     fileContent: string;
-  }) {
+  }): Promise<FileDTO> {
     const [id] = await db('items').insert({
       name: data.name,
       type: 'file',
@@ -50,7 +51,7 @@ export async function createFolder(
   }
   
   export async function getChildren(params: GetChildrenParams) {
-    const { parentId, page, limit, sort } = params;
+    const { parentId, page, limit, sort, search } = params;
   
     const query = db('items').select(
       'id',
@@ -61,23 +62,40 @@ export async function createFolder(
       'file_size'
     );
   
-    // ✅ handle parent
     if (parentId === null) {
       query.whereNull('parent_id');
     } else {
       query.where('parent_id', parentId);
     }
-  
+    
+    // ✅ search FIRST (before sorting)
+    if (search) {
+      query.where(function () {
+        this.where('name', 'like', `%${search}%`)
+            .orWhere('created_by', 'like', `%${search}%`);
+      });
+    }
+    
+    // ✅ THEN stable grouping
+    query.orderBy('type', 'asc');
+    
     // ✅ sorting
     if (sort) {
       const sortFields = sort.split(',');
-  
+    
       sortFields.forEach((field) => {
         const [column, direction] = field.split(':');
-  
-        const allowedColumns = ['name', 'created_at', 'file_size'];
-  
-        if (allowedColumns.includes(column)) {
+    
+        const allowedColumns = ['name', 'created_at', 'created_by', 'file_size'];
+    
+        if (!allowedColumns.includes(column)) return;
+    
+        if (column === 'file_size') {
+          query.orderByRaw(`
+            file_size IS NULL ASC,
+            file_size ${direction === 'desc' ? 'DESC' : 'ASC'}
+          `);
+        } else {
           query.orderBy(column, direction === 'desc' ? 'desc' : 'asc');
         }
       });
@@ -98,8 +116,10 @@ export async function createFolder(
     };
   }
 
-  export async function getFile(id: number) {
-    return db<Item>('items')
+  export async function getFile(id: number): Promise<Item | null> {
+    const file = await db<Item>('items')
       .where({ id, type: 'file' })
       .first();
+  
+    return file ?? null;
   }

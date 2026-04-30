@@ -7,7 +7,7 @@ const router = new Router();
 /**
  * Create folder
  */
-router.post('/folders', async (ctx: Context) => {
+router.post('/create-folder', async (ctx: Context) => {
   const { name, parentId, createdBy } = ctx.request.body as {
     name: string;
     parentId: number | null;

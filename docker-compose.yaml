@@ -27,6 +27,9 @@ services:
       DB_USER: root
       DB_PASSWORD: root
       DB_NAME: dms
+    volumes:
+      - ./src:/app/src
+      - ./uploads:/app/uploads
 
 volumes:
   db_data:

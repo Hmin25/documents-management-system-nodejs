@@ -7,7 +7,7 @@ export interface Item {
   parent_id: number | null;
   created_by: string;
   file_size?: number | null;
-  file_content?: string | null;
+  file_content?: string;
   created_at: string;
 }
 
@@ -16,4 +16,5 @@ export type GetChildrenParams = {
   page: number;
   limit: number;
   sort?: string;
+  search?: string;
 };
