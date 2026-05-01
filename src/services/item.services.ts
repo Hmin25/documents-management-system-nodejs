@@ -1,3 +1,4 @@
+import fs from 'fs';
 import db from '../db/knex';
 import { Item, GetChildrenParams } from '../types/db/items.types';
 import { FileDTO, FolderDTO } from '../types/http/file-folder.dto';
@@ -59,7 +60,8 @@ export async function createFolder(
       'type',
       'created_by',
       'created_at',
-      'file_size'
+      'file_size',
+      'file_content'
     );
   
     if (parentId === null) {
@@ -107,8 +109,15 @@ export async function createFolder(
     const offset = (page - 1) * limit;
     query.limit(limit).offset(offset);
   
-    const data = await query;
-  
+    // file missing, do not return
+    const rows = await query;
+
+    const data = rows
+      .filter((item) =>
+        item.type !== 'file' || (item.file_content && fs.existsSync(item.file_content))
+      )
+      .map(({ file_content, ...rest }) => rest);
+
     return {
       data,
       page,

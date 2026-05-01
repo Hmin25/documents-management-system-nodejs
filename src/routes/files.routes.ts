@@ -49,6 +49,10 @@ router.get('/files/:id/preview', async (ctx) => {
 
   const filePath = file?.file_content as string;
 
+  if (!fs.existsSync(filePath)) {
+    ctx.throw(404, 'File no longer available on disk');
+  }
+
   ctx.type = 'application/pdf';
   ctx.body = fs.createReadStream(filePath);
 });
