@@ -89,7 +89,7 @@ In the terminal where it's running, press **Ctrl + C** (on both Mac and Windows)
 Or, in a new terminal window opened in the project folder, run:
 
 ```bash
-docker compose down
+docker compose down -v
 ```
 
 Your data is saved — next time you run `docker compose up`, everything will still be there.
