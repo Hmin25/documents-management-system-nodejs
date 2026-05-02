@@ -7,6 +7,8 @@ RUN yarn install
 
 COPY . .
 
+RUN chmod +x entrypoint.sh
+
 EXPOSE 3000
 
-CMD ["yarn", "dev"]
+ENTRYPOINT ["./entrypoint.sh"]

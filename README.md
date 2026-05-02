@@ -43,33 +43,32 @@ git clone <repository-url>
 
 ## 🚀 Run the Backend
 
-### Step 1: Set Up Environment Variables
+### Step 1: Open a Terminal in the Project Folder
 
-Copy the `.env.example` file and rename it to `.env`:
+You need a terminal window pointed at the project folder.
 
-**On Mac/Linux:**
+**On Mac:**
 
-```bash
-cp .env.example .env
-```
+1. Open **Finder** and find the `documents-management-system-nodejs` folder.
+2. Right-click the folder → **Services** → **New Terminal at Folder**.
+  *(If you don't see this option: open Terminal from Spotlight, type `cd`  (with a space), then drag the folder into the Terminal window and press Enter.)*
 
-**On Windows (PowerShell):**
+**On Windows:**
 
-```powershell
-Copy-Item .env.example .env
-```
+1. Open the `documents-management-system-nodejs` folder in File Explorer.
+2. Click into the address bar at the top, type `cmd`, and press Enter.
 
-Or manually: in your project folder, right-click `.env.example` → **Duplicate** → rename to `.env`.
+### Step 2: Start Everything With One Command
 
-### Step 2: Start Everything With Docker Compose
-
-Open a terminal in the project folder and run:
+In the terminal, type this and press Enter:
 
 ```bash
 docker compose up --build
 ```
 
 The first time, this will take **3–5 minutes** as Docker downloads and builds everything. Be patient — lots of text will scroll by, that's normal.
+
+### Step 3: Wait for the "Server Running" Message
 
 You're done when you see:
 
