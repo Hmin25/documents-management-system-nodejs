@@ -4,7 +4,8 @@
     Frontend Next.js: https://github.com/Hmin25/documents-management-system-nextjs
 
 ## Quick View
-<img width="1210" height="576" alt="image" src="https://github.com/user-attachments/assets/c38e0bc8-6dc8-40bf-ae83-50b24dd0bd57" />
+<img width="1210" height="576" alt="image" src="https://github.com/user-attachments/assets/ad49b618-c808-417d-8b61-bcf5a0264e9b" />
+
 
 ## Functionality specifications (improvement ideas included):
 https://hmin-personal.notion.site/Document-Management-System-35161b8c0f628025a506d7ec3c676470
