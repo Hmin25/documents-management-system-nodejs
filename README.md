@@ -1,3 +1,16 @@
+# GitHub repositories link
+
+    Backend Node.js: https://github.com/Hmin25/documents-management-system-nodejs
+    Frontend Next.js: https://github.com/Hmin25/documents-management-system-nextjs
+
+## Quick View
+<img width="1210" height="576" alt="image" src="https://github.com/user-attachments/assets/c38e0bc8-6dc8-40bf-ae83-50b24dd0bd57" />
+
+## Functionality specifications (improvement ideas included):
+https://hmin-personal.notion.site/Document-Management-System-35161b8c0f628025a506d7ec3c676470
+
+---
+
 # Document Management System - Backend API
 
 A Node.js backend API built with Koa, TypeScript, and MySQL.
